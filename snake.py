@@ -45,6 +45,14 @@ snake_color = [40,250,96]
 snake_size = 25
 speed_multiplier = 5
 
+snake_mini_x = 0
+snake_mini_y = 0
+snake_mini_x_speed = 0
+snake_mini_y_speed = 0
+snake_mini_color = snake_color
+snake_mini_size = 10
+
+
 #pellet variables
 target_color = [255 , 0 , 0]
 target_x = random.randint(1 , 640)
@@ -84,15 +92,20 @@ while running:
             if event.key == pygame.K_LEFT:
                 snake_x_speed = -1*speed_multiplier
                 snake_y_speed = 0
-            if event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT:
                 snake_x_speed = speed_multiplier
                 snake_y_speed = 0
-            if event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP:
                 snake_y_speed = -1*speed_multiplier
                 snake_x_speed = 0
-            if event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN:
                 snake_y_speed = speed_multiplier
                 snake_x_speed = 0
+            if event.key == pygame.K_x:
+                snake_mini_x = snake_x
+                snake_mini_y = snake_y
+
+            
                 
     #pause for 20 milliseconds
     pygame.time.delay(20)
@@ -126,11 +139,11 @@ while running:
         else:   #invincibility power up, bounce off the walls 
             if snake_y < 0:
                 snake_y_speed = speed_multiplier
-            if snake_y > 480:
+            elif snake_y > 480:
                 snake_y_speed = -1*speed_multiplier
-            if snake_x < 0:
+            elif snake_x < 0:
                 snake_x_speed = speed_multiplier
-            if snake_x > 640:
+            elif snake_x > 640:
                 snake_x_speed = -1*speed_multiplier
             
         #update snake position
@@ -148,11 +161,11 @@ while running:
                 speed_multiplier += .1
             print score
             if random.random() < .10 and power_time == 0:   #chance to make an invincibility powerup
-                power_time = 60*1000
+                power_time = 30*1000
                 power_x = random.randint(1 , 640)
                 power_y = random.randint(1 , 480)
             if random.random() < .10 and power2_time == 0:  #chance to make a slow powerup
-                power2_time = 60*1000
+                power2_time = 30*1000
                 power2_x = random.randint(1 , 640)
                 power2_y = random.randint(1 , 480)
                 
